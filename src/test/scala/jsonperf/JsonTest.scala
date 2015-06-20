@@ -7,6 +7,8 @@ abstract class JsonTest[A](implicit ev: scala.reflect.Manifest[A]) extends Seria
   def clazz: Class[A]
   def sphereFromJson: io.sphere.json.FromJSON[A]
   def playRead: play.api.libs.json.Reads[A]
+  def sprayJsonReader: spray.json.JsonReader[A]
+  def argonautCodec: argonaut.CodecJson[A]
   def checkResult(result: A): Unit
 
 
@@ -54,5 +56,20 @@ abstract class JsonTest[A](implicit ev: scala.reflect.Manifest[A]) extends Seria
       Json.parse(json).as[A](playRead)
     }
     override def toString(): String = "playJson"
+  }
+
+  val sprayJson: Parsing= new Parsing {
+    override def apply(json: String): A = {
+      spray.json.JsonParser(json).convertTo[A](sprayJsonReader)
+    }
+    override def toString(): String = "sprayJson"
+  }
+
+  val argonautJson : Parsing= new Parsing {
+    override def apply(json: String): A = {
+      import argonaut.Argonaut._
+      json.decodeOption[A](argonautCodec).get
+    }
+    override def toString(): String = "argonaut"
   }
 }

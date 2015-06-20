@@ -28,6 +28,18 @@ class BigJsonTest extends JsonTest[BigJson] with Serializable {
   }
   override val clazz = classOf[BigJson]
 
+  override def sprayJsonReader = {
+    import spray.json.DefaultJsonProtocol._
+    implicit val personFormat = spray.json.DefaultJsonProtocol.jsonFormat2(Person)
+    spray.json.DefaultJsonProtocol.jsonFormat1(BigJson)
+  }
+
+  override def argonautCodec = {
+    import argonaut.Argonaut._
+    implicit val personCode = casecodec2(Person.apply, Person.unapply)("name", "age")
+    casecodec1(BigJson.apply, BigJson.unapply)("colleagues")
+  }
+
   override def checkResult(result: BigJson): Unit = {
     assert(result.colleagues.size == total, s"result.colleagues.size(${result.colleagues.size}) != $total")
     for (i ← 1 to 1000) {
