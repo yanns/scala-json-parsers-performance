@@ -17,6 +17,10 @@ class SmallJsonTest extends JsonTest[SmallJson] with Serializable {
   override val newA = SmallJson("hello", 5639, 345.23, true)
   override def playRead = play.api.libs.json.Json.reads[SmallJson]
   override def sphereFromJson = io.sphere.json.generic.jsonProduct((SmallJson.apply _).curried)
+  override def sprayRead = {
+    import spray.json.DefaultJsonProtocol._
+    spray.json.DefaultJsonProtocol.jsonFormat4(SmallJson)
+  }
   override val clazz = classOf[SmallJson]
 
   override def checkResult(result: SmallJson): Unit = {

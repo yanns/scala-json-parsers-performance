@@ -26,6 +26,11 @@ class BigJsonTest extends JsonTest[BigJson] with Serializable {
     implicit val personFromJson = jsonProduct((Person.apply _).curried)
     deriveJSON[BigJson]
   }
+  override def sprayRead = {
+    import spray.json.DefaultJsonProtocol._
+    implicit val personFormat = jsonFormat2(Person)
+    jsonFormat1(BigJson)
+  }
   override val clazz = classOf[BigJson]
 
   override def checkResult(result: BigJson): Unit = {
