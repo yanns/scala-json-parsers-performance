@@ -14,14 +14,21 @@ class SmallJsonTest extends JsonTest[SmallJson] with Serializable {
       |}
     """.stripMargin
 
-  override val newA = SmallJson("hello", 5639, 345.23, true)
+  override val newA = SmallJson("hello", 5639, 345.23, boolean = true)
+  override val clazz = classOf[SmallJson]
+
   override def playRead = play.api.libs.json.Json.reads[SmallJson]
+
   override def sphereFromJson = io.sphere.json.generic.jsonProduct((SmallJson.apply _).curried)
-  override def sprayRead = {
+
+  override def sprayJsonReader = {
     import spray.json.DefaultJsonProtocol._
     spray.json.DefaultJsonProtocol.jsonFormat4(SmallJson)
   }
-  override val clazz = classOf[SmallJson]
+  override def argonautCodec = {
+    import argonaut.Argonaut._
+    casecodec4(SmallJson.apply, SmallJson.unapply)("stringField", "intNumber", "floatingNumber", "boolean")
+  }
 
   override def checkResult(result: SmallJson): Unit = {
     assert(result.stringField == "hello")
