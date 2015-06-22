@@ -15,7 +15,8 @@ libraryDependencies ++=
   "org.json4s"                   %% "json4s-jackson"       % json4sVersion ::
   "io.sphere"                    %% "sphere-json"          % "0.5.14"      ::
   "com.typesafe.play"            %% "play-json"            % playVersion   ::
-  "io.spray"                     %%  "spray-json"          % "1.3.2"       ::
+  "io.spray"                     %% "spray-json"           % "1.3.2"       ::
+  "io.argonaut"                  %% "argonaut"             % "6.1"         ::
   Nil map (_ % Test)
 
 testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework")

@@ -7,7 +7,7 @@ trait PerfTest[A] extends PerformanceTest.Microbenchmark {
   import test._
 
   def jsonParsings: Gen[Parsing] = Gen.enumeration("parser")(
-    noParsing, jacksonParsing, json4sNative, json4sJackson, sphereJson, playJson, sprayJson)
+    noParsing, jacksonParsing, json4sNative, json4sJackson, sphereJson, playJson, sprayJson, argonautJson)
 
   def testRun() =
     performance of "JsonParser" in {

@@ -16,22 +16,31 @@ class BigJsonTest extends JsonTest[BigJson] with Serializable {
     """.stripMargin
 
   override val newA = BigJson(colleagues = for (i ← 1 to 1000) yield Person(s"person-$i", i))
+  override val clazz = classOf[BigJson]
+
   override def playRead = {
     import play.api.libs.json.Json
     implicit val personReads = Json.reads[Person]
     Json.reads[BigJson]
   }
+
   override def sphereFromJson = {
     import io.sphere.json.generic._
     implicit val personFromJson = jsonProduct((Person.apply _).curried)
     deriveJSON[BigJson]
   }
-  override def sprayRead = {
+
+  override def sprayJsonReader = {
     import spray.json.DefaultJsonProtocol._
-    implicit val personFormat = jsonFormat2(Person)
-    jsonFormat1(BigJson)
+    implicit val personFormat = spray.json.DefaultJsonProtocol.jsonFormat2(Person)
+    spray.json.DefaultJsonProtocol.jsonFormat1(BigJson)
   }
-  override val clazz = classOf[BigJson]
+
+  override def argonautCodec = {
+    import argonaut.Argonaut._
+    implicit val personCode = casecodec2(Person.apply, Person.unapply)("name", "age")
+    casecodec1(BigJson.apply, BigJson.unapply)("colleagues")
+  }
 
   override def checkResult(result: BigJson): Unit = {
     assert(result.colleagues.size == total, s"result.colleagues.size(${result.colleagues.size}) != $total")
