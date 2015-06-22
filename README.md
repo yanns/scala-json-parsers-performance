@@ -4,7 +4,7 @@ Scala JSON parser performance comparator
 Compares performance of several JSON parsers used in Scala.
 The test case is to deserialize a json into a case class.
 
-The performances are measure 2 ways:
+The performances are measured in 2 ways:
 - with [ScalaMeter](http://scalameter.github.io/)
 - with [JMH](https://github.com/ktoso/sbt-jmh)
 
