@@ -38,9 +38,3 @@ class SmallJsonTest extends JsonTest[SmallJson] with Serializable {
   }
 }
 
-object SmallJsonPerf extends PerfTest[SmallJson] {
-  override val test = new SmallJsonTest
-
-  testRun()
-
-}

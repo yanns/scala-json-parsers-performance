@@ -7,7 +7,7 @@ trait PerfTest[A] extends PerformanceTest.Microbenchmark {
   import test._
 
   def jsonParsings: Gen[Parsing] = Gen.enumeration("parser")(
-    noParsing, jacksonParsing, json4sNative, json4sJackson, sphereJson, playJson, sprayJson, argonautJson, noParsing)
+    noParsing, argonautJson, jacksonParsing, json4sJackson, json4sNative, playJson, sphereJson, sprayJson, noParsing)
 
   def testRun() =
     performance of "JsonParser" in {
@@ -18,5 +18,17 @@ trait PerfTest[A] extends PerformanceTest.Microbenchmark {
         }
       }
     }
+}
 
+
+object SmallJsonPerf extends PerfTest[SmallJson] {
+  override val test = new SmallJsonTest
+
+  testRun()
+}
+
+object BigJsonPerf extends PerfTest[BigJson] {
+  override val test = new BigJsonTest
+
+  testRun()
 }

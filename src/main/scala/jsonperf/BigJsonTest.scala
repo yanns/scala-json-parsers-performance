@@ -52,9 +52,3 @@ class BigJsonTest extends JsonTest[BigJson] with Serializable {
   }
 }
 
-object BigJsonPerf extends PerfTest[BigJson] {
-  override val test = new BigJsonTest
-
-  testRun()
-
-}
