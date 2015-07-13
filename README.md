@@ -12,46 +12,47 @@ The performances are measured in 2 ways:
 ## with a little json:
 ### ScalaMeter results:
 
-    [info] Parameters(parser -> argonaut): 0.206251
-    [info] Parameters(parser -> jackson): 0.058198
-    [info] Parameters(parser -> json4sJackson): 0.198448
-    [info] Parameters(parser -> json4sNative): 0.231234
-    [info] Parameters(parser -> playJson): 0.21752
-    [info] Parameters(parser -> sphereJson): 0.117179
-    [info] Parameters(parser -> sprayJson): 0.19467
+    [info] Parameters(parser -> argonaut): 0.204488
+    [info] Parameters(parser -> jackson): 0.058759
+    [info] Parameters(parser -> json4sJackson): 0.211516
+    [info] Parameters(parser -> json4sNative): 0.259956
+    [info] Parameters(parser -> playJson): 0.221491
+    [info] Parameters(parser -> sphereJson): 0.118997
+    [info] Parameters(parser -> sprayJson): 0.195646
 
 ### JMH results:
 
-    [info] SmallJsonBenchmark.runArgonautJson    avgt    5   0.002 ±  0.001  ms/op
-    [info] SmallJsonBenchmark.runJacksonParsing  avgt    5   0.001 ±  0.001  ms/op
-    [info] SmallJsonBenchmark.runJson4sJackson   avgt    5   0.002 ±  0.001  ms/op
-    [info] SmallJsonBenchmark.runJson4sNative    avgt    5   0.002 ±  0.001  ms/op
-    [info] SmallJsonBenchmark.runNoParsing       avgt    5  ≈ 10⁻⁶           ms/op
-    [info] SmallJsonBenchmark.runPlayJson        avgt    5   0.003 ±  0.001  ms/op
-    [info] SmallJsonBenchmark.runSphereJson      avgt    5   0.001 ±  0.001  ms/op
-    [info] SmallJsonBenchmark.runSprayJson       avgt    5   0.003 ±  0.001  ms/op
+    [info] SmallJsonBenchmark.runArgonautJson    avgt    3   0.002 ±  0.003  ms/op
+    [info] SmallJsonBenchmark.runJacksonParsing  avgt    3   0.001 ±  0.001  ms/op
+    [info] SmallJsonBenchmark.runJson4sJackson   avgt    3   0.002 ±  0.001  ms/op
+    [info] SmallJsonBenchmark.runJson4sNative    avgt    3   0.002 ±  0.001  ms/op
+    [info] SmallJsonBenchmark.runNoParsing       avgt    3  ≈ 10⁻⁶           ms/op
+    [info] SmallJsonBenchmark.runPlayJson        avgt    3   0.003 ±  0.001  ms/op
+    [info] SmallJsonBenchmark.runSphereJson      avgt    3   0.001 ±  0.002  ms/op
+    [info] SmallJsonBenchmark.runSprayJson       avgt    3   0.003 ±  0.003  ms/op
 
 ## with a big json:
 ### ScalaMeter results:
 
-    [info] Parameters(parser -> argonaut): 6.862806
-    [info] Parameters(parser -> jackson): 2.917868
-    [info] Parameters(parser -> json4sJackson): 9.895644
-    [info] Parameters(parser -> json4sNative): 12.452062
-    [info] Parameters(parser -> playJson): 9.54849
-    [info] Parameters(parser -> sphereJson): 5.895542
+    [info] Parameters(parser -> argonaut): 7.429903
+    [info] Parameters(parser -> jackson): 2.887989
+    [info] Parameters(parser -> json4sJackson): 10.013866
+    [info] Parameters(parser -> json4sNative): 11.571219
+    [info] Parameters(parser -> playJson): 10.316594
+    [info] Parameters(parser -> sphereJson): 6.079708
+    [info] Parameters(parser -> sprayJson): 2.822319
     [info] Parameters(parser -> sprayJson): 3.030669
 
 ### JMH results:
 
-    [info] BigJsonBenchmark.runArgonautJson      avgt    5   1.206 ±  0.040  ms/op
-    [info] BigJsonBenchmark.runJacksonParsing    avgt    5   1.696 ±  0.275  ms/op
-    [info] BigJsonBenchmark.runJson4sJackson     avgt    5   2.201 ±  0.154  ms/op
-    [info] BigJsonBenchmark.runJson4sNative      avgt    5   2.270 ±  0.077  ms/op
-    [info] BigJsonBenchmark.runNoParsing         avgt    5   0.108 ±  0.003  ms/op
-    [info] BigJsonBenchmark.runPlayJson          avgt    5   2.285 ±  0.149  ms/op
-    [info] BigJsonBenchmark.runSphereJson        avgt    5   3.301 ±  0.116  ms/op
-    [info] BigJsonBenchmark.runSprayJson         avgt    5   1.333 ±  0.009  ms/op
+    [info] BigJsonBenchmark.runArgonautJson      avgt    3   1.208 ±  0.699  ms/op
+    [info] BigJsonBenchmark.runJacksonParsing    avgt    3   1.930 ±  4.286  ms/op
+    [info] BigJsonBenchmark.runJson4sJackson     avgt    3   2.445 ±  0.473  ms/op
+    [info] BigJsonBenchmark.runJson4sNative      avgt    3   2.395 ±  1.488  ms/op
+    [info] BigJsonBenchmark.runNoParsing         avgt    3   0.116 ±  0.113  ms/op
+    [info] BigJsonBenchmark.runPlayJson          avgt    3   2.362 ±  1.001  ms/op
+    [info] BigJsonBenchmark.runSphereJson        avgt    3   3.505 ±  1.063  ms/op
+    [info] BigJsonBenchmark.runSprayJson         avgt    3   1.363 ±  0.459  ms/op
 
 # How to test it yourself?
 
