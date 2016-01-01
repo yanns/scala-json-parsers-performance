@@ -7,6 +7,8 @@ scalaVersion := "2.11.7"
 val json4sVersion = "3.2.11"
 val playVersion = "2.4.2"
 
+resolvers += Resolver.bintrayRepo("commercetools", "maven")
+
 libraryDependencies ++=
   "com.storm-enroute"            %% "scalameter"           % "0.6"         ::
   "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.5.2"       ::
