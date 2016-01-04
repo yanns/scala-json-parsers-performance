@@ -12,8 +12,7 @@ abstract class JmhBenchmarks[A](test: JsonTest[A]) {
   import test._
 
   def runTest(implementation: JsonParsing[A]) = {
-    val result = implementation(test.json)
-    checkResult(result)
+    implementation(test.json)
   }
 
   @Benchmark

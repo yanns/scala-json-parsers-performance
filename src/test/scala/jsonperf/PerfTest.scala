@@ -13,8 +13,7 @@ trait PerfTest[A] extends PerformanceTest.Microbenchmark {
     performance of "JsonParser" in {
       measure method "deserialize" in {
         using(jsonParsings) in { jsonParsing ⇒
-          val result = jsonParsing(json)
-          test.checkResult(result)
+          jsonParsing(json)
         }
       }
     }

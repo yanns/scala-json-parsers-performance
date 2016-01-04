@@ -22,6 +22,7 @@ libraryDependencies ++=
 
 libraryDependencies ++=
   "com.storm-enroute"            %% "scalameter"           % "0.6"         ::
+  "org.scalatest"                %% "scalatest"            % "2.2.5"       ::
   Nil map (_ % Test)
 
 testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework")
