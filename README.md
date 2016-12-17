@@ -43,13 +43,13 @@ The performances are measured in 2 ways:
 
 ### JMH results:
 
-    [info] BigJsonBenchmark.runArgonautJson      avgt   10   1.084 ±  0.024  ms/op
-    [info] BigJsonBenchmark.runJacksonParsing    avgt   10   0.203 ±  0.009  ms/op
-    [info] BigJsonBenchmark.runJson4sJackson     avgt   10   1.264 ±  0.021  ms/op
-    [info] BigJsonBenchmark.runJson4sNative      avgt   10   1.289 ±  0.044  ms/op
-    [info] BigJsonBenchmark.runPlayJson          avgt   10   1.350 ±  0.047  ms/op
-    [info] BigJsonBenchmark.runSphereJson        avgt   10   0.829 ±  0.038  ms/op
-    [info] BigJsonBenchmark.runSprayJson         avgt   10   0.372 ±  0.007  ms/op
+    [info] BigJsonBenchmark.runArgonautJson      avgt   10   1.068 ±  0.014  ms/op
+    [info] BigJsonBenchmark.runJacksonParsing    avgt   10   0.200 ±  0.003  ms/op
+    [info] BigJsonBenchmark.runJson4sJackson     avgt   10   1.302 ±  0.015  ms/op
+    [info] BigJsonBenchmark.runJson4sNative      avgt   10   1.350 ±  0.014  ms/op
+    [info] BigJsonBenchmark.runPlayJson          avgt   10   1.304 ±  0.017  ms/op
+    [info] BigJsonBenchmark.runSphereJson        avgt   10   0.778 ±  0.015  ms/op
+    [info] BigJsonBenchmark.runSprayJson         avgt   10   0.359 ±  0.008  ms/op
 
 # How to test it yourself?
 
@@ -62,7 +62,7 @@ Simply clone this repository and run sbt:
 
 ## for JMH
 
-    jmh:run
+    jmh:run -i 10 -wi 10 -f1 -t1
 
 for a quick feedback:
 
