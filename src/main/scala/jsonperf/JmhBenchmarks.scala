@@ -8,12 +8,10 @@ import org.openjdk.jmh.annotations._
 @State(Scope.Benchmark)
 @BenchmarkMode(Array(Mode.AverageTime))
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-abstract class JmhBenchmarks[A](test: JsonTest[A]) {
+abstract class JmhBenchmarks[A <: AnyRef](val test: JsonTest[A]) {
   import test._
 
-  def runTest(implementation: JsonParsing[A]) = {
-    implementation(test.json)
-  }
+  def runTest(implementation: JsonParsing[A]): Unit
 
   @Benchmark
   def runNoParsing() = runTest(noParsing)
@@ -41,4 +39,14 @@ abstract class JmhBenchmarks[A](test: JsonTest[A]) {
 
 }
 
-class BigJsonBenchmark extends JmhBenchmarks(new BigJsonTest)
+class BigJsonBenchmarkDeserialize extends JmhBenchmarks(new BigJsonTest) {
+  def runTest(implementation: JsonParsing[BigJson]): Unit = {
+    implementation.deserialize(test.json)
+  }
+}
+
+class BigJsonBenchmarkSerialize extends JmhBenchmarks(new BigJsonTest) {
+  def runTest(implementation: JsonParsing[BigJson]): Unit = {
+    implementation.serialize(test.newA)
+  }
+}

@@ -21,8 +21,15 @@ class UnitTest extends FreeSpec with Matchers with TableDrivenPropertyChecks {
         s"using parser '$jsonParsing'" - {
           "should deserialize json" in {
             val json = test.json
-            val result = test.argonautJson(json)
+            val result = jsonParsing.deserialize(json)
             result shouldEqual test.newA
+          }
+
+          "should serialize json" in {
+            val a = test.newA
+            val result = jsonParsing.serialize(a)
+            val aa = jsonParsing.deserialize(result)
+            aa should be (a)
           }
         }
       }
