@@ -41,5 +41,4 @@ abstract class JmhBenchmarks[A](test: JsonTest[A]) {
 
 }
 
-class SmallJsonBenchmark extends JmhBenchmarks(new SmallJsonTest)
 class BigJsonBenchmark extends JmhBenchmarks(new BigJsonTest)

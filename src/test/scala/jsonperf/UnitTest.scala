@@ -7,7 +7,6 @@ class UnitTest extends FreeSpec with Matchers with TableDrivenPropertyChecks {
 
   val tests = Table(
     "test",
-    new SmallJsonTest,
     new BigJsonTest
   )
 

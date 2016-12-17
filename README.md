@@ -7,17 +7,6 @@ The test case is to deserialize a json into a case class.
 The performances are measured with [JMH](https://github.com/ktoso/sbt-jmh)
 
 # result
-## with a little json:
-
-### JMH results:
-
-    [info] SmallJsonBenchmark.runArgonautJson    avgt   10   0.002 ±  0.001  ms/op
-    [info] SmallJsonBenchmark.runJacksonParsing  avgt   10   0.001 ±  0.001  ms/op
-    [info] SmallJsonBenchmark.runJson4sJackson   avgt   10   0.002 ±  0.001  ms/op
-    [info] SmallJsonBenchmark.runJson4sNative    avgt   10   0.002 ±  0.001  ms/op
-    [info] SmallJsonBenchmark.runPlayJson        avgt   10   0.003 ±  0.001  ms/op
-    [info] SmallJsonBenchmark.runSphereJson      avgt   10   0.001 ±  0.001  ms/op
-    [info] SmallJsonBenchmark.runSprayJson       avgt   10   0.003 ±  0.001  ms/op
 
 ## with a big json:
 
@@ -42,3 +31,7 @@ Simply clone this repository and run sbt:
 for a quick feedback:
 
     jmh:run -i 3 -wi 3 -f1 -t1
+
+## to check how many objects are allocated
+
+    jmh:run -i 10 -wi 10 -f1 -t1 -prof gc
