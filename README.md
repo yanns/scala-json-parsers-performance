@@ -1,10 +1,24 @@
 Scala JSON parser performance comparator
 ========================================
 
-Compares performance of several JSON parsers used in Scala.
-The test case is to deserialize a json into a case class.
+Compares performance of several JSON parsers used in Scala:
+
+- [argonaut](http://argonaut.io/)
+- [jackson](http://wiki.fasterxml.com/JacksonHome) with [scala module](https://github.com/FasterXML/jackson-module-scala)
+- [json4s with jackson](https://github.com/json4s/json4s#jackson)
+- [json4s native](https://github.com/json4s/json4s)
+- [play-json](https://www.playframework.com/documentation/latest/ScalaJson), used in [Play Framework](https://www.playframework.com/)
+- [sphere-json](https://github.com/sphereio/sphere-scala-libs/tree/master/json)
+- [spray-json](https://github.com/spray/spray-json)
+
+The test case is to deserialize a json into a case class and to serialize back to json.
 
 The performances are measured with [JMH](https://github.com/ktoso/sbt-jmh)
+
+# How to run it yourself?
+
+Clone the project and start `sbt`.
+
 
 # Performance test
 
@@ -29,6 +43,7 @@ The performances are measured with [JMH](https://github.com/ktoso/sbt-jmh)
 [info] BigJsonBenchmarkDeserialize.runSphereJson      avgt   10   0.803 ±  0.014  ms/op
 [info] BigJsonBenchmarkDeserialize.runSprayJson       avgt   10   0.358 ±  0.005  ms/op
 ```
+_(lower is better)_
 
 ## Serialization (case class -> String)
 
@@ -42,6 +57,7 @@ The performances are measured with [JMH](https://github.com/ktoso/sbt-jmh)
 [info] BigJsonBenchmarkSerialize.runSphereJson        avgt   10   0.361 ±  0.005  ms/op
 [info] BigJsonBenchmarkSerialize.runSprayJson         avgt   10   0.427 ±  0.007  ms/op
 ```
+_(lower is better)_
 
 # Pressure on the GC
 
@@ -81,6 +97,7 @@ The performances are measured with [JMH](https://github.com/ktoso/sbt-jmh)
 [info] BigJsonBenchmarkDeserialize.runSprayJson:·gc.count                              avgt   10      194.000               counts
 [info] BigJsonBenchmarkDeserialize.runSprayJson:·gc.time                               avgt   10      101.000                   ms
 ```
+_(lower is better)_
 
 ## Serialization (case class -> String):
 
@@ -114,3 +131,4 @@ The performances are measured with [JMH](https://github.com/ktoso/sbt-jmh)
 [info] BigJsonBenchmarkSerialize.runSprayJson:·gc.count                                avgt   10      192.000               counts
 [info] BigJsonBenchmarkSerialize.runSprayJson:·gc.time                                 avgt   10       94.000                   ms
 ```
+_(lower is better)_
