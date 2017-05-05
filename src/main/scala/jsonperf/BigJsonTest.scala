@@ -1,7 +1,7 @@
 package jsonperf
 
 case class Person(name: String, age: Int)
-case class BigJson(colleagues: Seq[Person])
+case class BigJson(colleagues: Vector[Person])
 
 class BigJsonTest extends JsonTest[BigJson] with Serializable {
 
@@ -15,7 +15,7 @@ class BigJsonTest extends JsonTest[BigJson] with Serializable {
       |}
     """.stripMargin
 
-  override val newA = BigJson(colleagues = for (i ← 1 to 1000) yield Person(s"person-$i", i))
+  override val newA = BigJson(colleagues = (for (i ← 1 to 1000) yield Person(s"person-$i", i)).toVector)
   override val clazz = classOf[BigJson]
 
   override def playFormat = {
