@@ -26,7 +26,7 @@ class BigJsonTest extends JsonTest[BigJson] with Serializable {
 
   override def sphereJSON = {
     import io.sphere.json.generic._
-    implicit val personFromJson = jsonProduct((Person.apply _).curried)
+    implicit val personFromJson = jsonProduct(Person.apply _)
     deriveJSON[BigJson]
   }
 
