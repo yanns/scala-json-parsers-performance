@@ -4,6 +4,7 @@ Scala JSON parser performance comparator
 Compares performance of several JSON parsers used in Scala:
 
 - [argonaut](http://argonaut.io/)
+- [circe](https://circe.github.io/circe/)
 - [jackson](http://wiki.fasterxml.com/JacksonHome) with [scala module](https://github.com/FasterXML/jackson-module-scala)
 - [json4s with jackson](https://github.com/json4s/json4s#jackson)
 - [json4s native](https://github.com/json4s/json4s)
