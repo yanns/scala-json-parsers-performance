@@ -42,6 +42,17 @@ class BigJsonTest extends JsonTest[BigJson] with Serializable {
     casecodec1(BigJson.apply, BigJson.unapply)("colleagues")
   }
 
+  override def circeEncoder = {
+    import io.circe.generic.semiauto._
+    implicit val personEncoder = deriveEncoder[Person]
+    deriveEncoder[BigJson]
+  }
+
+  override def circeDecoder = {
+    import io.circe.generic.semiauto._
+    implicit val personDecoder = deriveDecoder[Person]
+    deriveDecoder[BigJson]
+  }
   override def checkResult(result: BigJson): Unit = {
     assert(result.colleagues.size == total, s"result.colleagues.size(${result.colleagues.size}) != $total")
     for (i ← 1 to 1000) {

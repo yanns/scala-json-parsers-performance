@@ -6,10 +6,14 @@ scalaVersion := "2.12.4"
 
 val json4sVersion = "3.5.3"
 val playVersion = "2.6.7"
+val circeVersion     = "0.8.0"
 
 resolvers += Resolver.bintrayRepo("commercetools", "maven")
 
 libraryDependencies ++=
+  "io.circe"                     %% "circe-core"           % circeVersion  ::
+  "io.circe"                     %% "circe-generic"        % circeVersion  ::
+  "io.circe"                     %% "circe-parser"         % circeVersion  ::
   "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.9.2"       ::
   "org.json4s"                   %% "json4s-native"        % json4sVersion ::
   "org.json4s"                   %% "json4s-jackson"       % json4sVersion ::
