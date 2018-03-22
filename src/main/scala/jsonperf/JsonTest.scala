@@ -21,18 +21,19 @@ abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) ext
 
   type Parsing = JsonParsing[A]
 
-  def noParsing: Parsing = new Parsing {
+  val noParsing: Parsing = new Parsing {
     override def deserialize(json: String): A = newA
     override def serialize(a: A): String = ""
     override def toString(): String = "noParsing"
   }
-  def jacksonParsing: Parsing = new Parsing {
+
+  val jacksonParsing: Parsing = new Parsing {
     override def deserialize(json: String): A = Jackson.mapper.readValue(json, clazz)
     override def serialize(a: A): String = Jackson.mapper.writeValueAsString(a)
     override def toString(): String = "jackson"
   }
 
-  def json4sNative: Parsing = new Parsing {
+  val json4sNative: Parsing = new Parsing {
     import org.json4s._
     import org.json4s.native.JsonMethods._
     import org.json4s.native.Serialization
@@ -46,7 +47,7 @@ abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) ext
     override def toString(): String = "json4sNative"
   }
 
-  def json4sJackson: Parsing = new Parsing {
+  val json4sJackson: Parsing = new Parsing {
     import org.json4s._
     import org.json4s.jackson.JsonMethods._
     import org.json4s.jackson.Serialization
@@ -60,7 +61,7 @@ abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) ext
     override def toString(): String = "json4sJackson"
   }
 
-  def sphereJson: Parsing = new Parsing {
+  val sphereJson: Parsing = new Parsing {
     val fromToJson = sphereJSON
     override def deserialize(json: String): A = {
       io.sphere.json.getFromJSON(json)(fromToJson)
@@ -71,7 +72,7 @@ abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) ext
     override def toString(): String = "sphereJson"
   }
 
-  def playJson: Parsing = new Parsing {
+  val playJson: Parsing = new Parsing {
     val format = playFormat
     override def deserialize(json: String): A = {
       import play.api.libs.json.Json
@@ -84,7 +85,7 @@ abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) ext
     override def toString(): String = "playJson"
   }
 
-  def sprayJson: Parsing = new Parsing {
+  val sprayJson: Parsing = new Parsing {
     val format = sprayJsonFormat
     override def deserialize(json: String): A = {
       spray.json.JsonParser(json).convertTo[A](format)
@@ -96,7 +97,7 @@ abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) ext
     override def toString(): String = "sprayJson"
   }
 
-  def argonautJson: Parsing = new Parsing {
+  val argonautJson: Parsing = new Parsing {
     val codec = argonautCodec
     override def deserialize(json: String): A = {
       import argonaut.Argonaut._
@@ -110,7 +111,7 @@ abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) ext
     override def toString(): String = "argonaut"
   }
 
-  def circeJson: Parsing = new Parsing {
+  val circeJson: Parsing = new Parsing {
     val encoder = circeEncoder
     val decoder = circeDecoder
     override def deserialize(json: String): A = {
@@ -125,7 +126,7 @@ abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) ext
     override def toString(): String = "circe"
   }
 
-  def jsoniter: Parsing = new Parsing {
+  val jsoniter: Parsing = new Parsing {
     import com.github.plokhotnyuk.jsoniter_scala.core._
     val codec = jsoniterCodec
     override def deserialize(s: String): A = {
