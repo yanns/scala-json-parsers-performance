@@ -36,14 +36,14 @@ Clone the project and start `sbt`.
 
 ```
 [info] Benchmark                                      Mode  Cnt   Score   Error  Units
-[info] BigJsonBenchmarkDeserialize.runJson4sJackson   avgt    2   1,713          ms/op
-[info] BigJsonBenchmarkDeserialize.runJson4sNative    avgt    2   1,747          ms/op
-[info] BigJsonBenchmarkDeserialize.runPlayJson        avgt    2   1,558          ms/op
-[info] BigJsonBenchmarkDeserialize.runArgonautJson    avgt    2   1,065          ms/op
-[info] BigJsonBenchmarkDeserialize.runSphereJson      avgt    2   0,556          ms/op
-[info] BigJsonBenchmarkDeserialize.runCirce           avgt    2   0,476          ms/op
-[info] BigJsonBenchmarkDeserialize.runSprayJson       avgt    2   0,409          ms/op
-[info] BigJsonBenchmarkDeserialize.runJacksonParsing  avgt    2   0,263          ms/op
+[info] BigJsonBenchmarkDeserialize.runJson4sJackson   avgt   10   1,820 ±  0,268  ms/op
+[info] BigJsonBenchmarkDeserialize.runJson4sNative    avgt   10   1,847 ±  0,030  ms/op
+[info] BigJsonBenchmarkDeserialize.runPlayJson        avgt   10   1,661 ±  0,073  ms/op
+[info] BigJsonBenchmarkDeserialize.runArgonautJson    avgt   10   1,300 ±  0,171  ms/op
+[info] BigJsonBenchmarkDeserialize.runSphereJson      avgt   10   0,654 ±  0,145  ms/op
+[info] BigJsonBenchmarkDeserialize.runCirce           avgt   10   0,489 ±  0,024  ms/op
+[info] BigJsonBenchmarkDeserialize.runSprayJson       avgt   10   0,437 ±  0,023  ms/op
+[info] BigJsonBenchmarkDeserialize.runJacksonParsing  avgt   10   0,250 ±  0,007  ms/op
 ```
 _ordered (lower is better)_
 
@@ -51,14 +51,14 @@ _ordered (lower is better)_
 
 ```
 [info] Benchmark                                      Mode  Cnt   Score   Error  Units
-[info] BigJsonBenchmarkSerialize.runJson4sNative      avgt    2   1,311          ms/op
-[info] BigJsonBenchmarkSerialize.runJson4sJackson     avgt    2   1,161          ms/op
-[info] BigJsonBenchmarkSerialize.runArgonautJson      avgt    2   1,149          ms/op
-[info] BigJsonBenchmarkSerialize.runPlayJson          avgt    2   0,701          ms/op
-[info] BigJsonBenchmarkSerialize.runCirce             avgt    2   0,561          ms/op
-[info] BigJsonBenchmarkSerialize.runSprayJson         avgt    2   0,448          ms/op
-[info] BigJsonBenchmarkSerialize.runSphereJson        avgt    2   0,321          ms/op
-[info] BigJsonBenchmarkSerialize.runJacksonParsing    avgt    2   0,105          ms/op
+[info] BigJsonBenchmarkSerialize.runJson4sNative      avgt   10   1,348 ±  0,290  ms/op
+[info] BigJsonBenchmarkSerialize.runJson4sJackson     avgt   10   1,247 ±  0,130  ms/op
+[info] BigJsonBenchmarkSerialize.runArgonautJson      avgt   10   1,282 ±  0,212  ms/op
+[info] BigJsonBenchmarkSerialize.runPlayJson          avgt   10   1,027 ±  0,150  ms/op
+[info] BigJsonBenchmarkSerialize.runCirce             avgt   10   0,677 ±  0,111  ms/op
+[info] BigJsonBenchmarkSerialize.runSprayJson         avgt   10   0,536 ±  0,077  ms/op
+[info] BigJsonBenchmarkSerialize.runSphereJson        avgt   10   0,332 ±  0,007  ms/op
+[info] BigJsonBenchmarkSerialize.runJacksonParsing    avgt   10   0,114 ±  0,014  ms/op
 ```
 _ordered (lower is better)_
 
