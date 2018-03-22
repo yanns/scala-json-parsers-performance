@@ -1,5 +1,9 @@
 package jsonperf
 
+import java.nio.charset.StandardCharsets
+
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+
 abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) extends Serializable {
 
   def json: String
@@ -11,6 +15,7 @@ abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) ext
   def argonautCodec: argonaut.CodecJson[A]
   def circeEncoder: io.circe.Encoder[A]
   def circeDecoder: io.circe.Decoder[A]
+  def jsoniterCodec: JsonValueCodec[A]
   def checkResult(result: A): Unit
 
 
@@ -91,7 +96,7 @@ abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) ext
     override def toString(): String = "sprayJson"
   }
 
-  def argonautJson : Parsing = new Parsing {
+  def argonautJson: Parsing = new Parsing {
     val codec = argonautCodec
     override def deserialize(json: String): A = {
       import argonaut.Argonaut._
@@ -105,7 +110,7 @@ abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) ext
     override def toString(): String = "argonaut"
   }
 
-  def circeJson : Parsing = new Parsing {
+  def circeJson: Parsing = new Parsing {
     val encoder = circeEncoder
     val decoder = circeDecoder
     override def deserialize(json: String): A = {
@@ -118,5 +123,17 @@ abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) ext
     }
 
     override def toString(): String = "circe"
+  }
+
+  def jsoniter: Parsing = new Parsing {
+    import com.github.plokhotnyuk.jsoniter_scala.core._
+    val codec = jsoniterCodec
+    override def deserialize(s: String): A = {
+      readFromArray(s.getBytes(StandardCharsets.UTF_8))(codec)
+    }
+    override def serialize(a: A): String = {
+      new String(writeToArray(a)(codec), StandardCharsets.UTF_8)
+    }
+    override def toString(): String = "jsoniter"
   }
 }

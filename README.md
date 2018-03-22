@@ -11,6 +11,7 @@ Compares performance of several JSON parsers used in Scala:
 - [play-json](https://www.playframework.com/documentation/latest/ScalaJson), used in [Play Framework](https://www.playframework.com/)
 - [sphere-json](https://github.com/sphereio/sphere-scala-libs/tree/master/json)
 - [spray-json](https://github.com/spray/spray-json)
+- [jsoniter-scala](https://github.com/plokhotnyuk/jsoniter-scala)
 
 The test case is to deserialize a json into a case class and to serialize back to json.
 
@@ -36,14 +37,15 @@ Clone the project and start `sbt`.
 
 ```
 [info] Benchmark                                      Mode  Cnt   Score   Error  Units
-[info] BigJsonBenchmarkDeserialize.runJson4sJackson   avgt   10   1,820 ±  0,268  ms/op
-[info] BigJsonBenchmarkDeserialize.runJson4sNative    avgt   10   1,847 ±  0,030  ms/op
-[info] BigJsonBenchmarkDeserialize.runPlayJson        avgt   10   1,661 ±  0,073  ms/op
-[info] BigJsonBenchmarkDeserialize.runArgonautJson    avgt   10   1,300 ±  0,171  ms/op
-[info] BigJsonBenchmarkDeserialize.runSphereJson      avgt   10   0,654 ±  0,145  ms/op
-[info] BigJsonBenchmarkDeserialize.runCirce           avgt   10   0,489 ±  0,024  ms/op
-[info] BigJsonBenchmarkDeserialize.runSprayJson       avgt   10   0,437 ±  0,023  ms/op
-[info] BigJsonBenchmarkDeserialize.runJacksonParsing  avgt   10   0,250 ±  0,007  ms/op
+[info] BigJsonBenchmarkDeserialize.runJson4sNative    avgt   10   1,785 ±  0,121  ms/op
+[info] BigJsonBenchmarkDeserialize.runPlayJson        avgt   10   1,700 ±  0,225  ms/op
+[info] BigJsonBenchmarkDeserialize.runJson4sJackson   avgt   10   1,677 ±  0,031  ms/op
+[info] BigJsonBenchmarkDeserialize.runArgonautJson    avgt   10   1,067 ±  0,037  ms/op
+[info] BigJsonBenchmarkDeserialize.runSphereJson      avgt   10   0,611 ±  0,154  ms/op
+[info] BigJsonBenchmarkDeserialize.runCirce           avgt   10   0,491 ±  0,012  ms/op
+[info] BigJsonBenchmarkDeserialize.runSprayJson       avgt   10   0,436 ±  0,038  ms/op
+[info] BigJsonBenchmarkDeserialize.runJacksonParsing  avgt   10   0,237 ±  0,004  ms/op
+[info] BigJsonBenchmarkDeserialize.runJsoniter        avgt   10   0,128 ±  0,002  ms/op
 ```
 _ordered (lower is better)_
 
@@ -51,14 +53,15 @@ _ordered (lower is better)_
 
 ```
 [info] Benchmark                                      Mode  Cnt   Score   Error  Units
-[info] BigJsonBenchmarkSerialize.runJson4sNative      avgt   10   1,348 ±  0,290  ms/op
-[info] BigJsonBenchmarkSerialize.runJson4sJackson     avgt   10   1,247 ±  0,130  ms/op
-[info] BigJsonBenchmarkSerialize.runArgonautJson      avgt   10   1,282 ±  0,212  ms/op
-[info] BigJsonBenchmarkSerialize.runPlayJson          avgt   10   1,027 ±  0,150  ms/op
-[info] BigJsonBenchmarkSerialize.runCirce             avgt   10   0,677 ±  0,111  ms/op
-[info] BigJsonBenchmarkSerialize.runSprayJson         avgt   10   0,536 ±  0,077  ms/op
-[info] BigJsonBenchmarkSerialize.runSphereJson        avgt   10   0,332 ±  0,007  ms/op
-[info] BigJsonBenchmarkSerialize.runJacksonParsing    avgt   10   0,114 ±  0,014  ms/op
+[info] BigJsonBenchmarkSerialize.runJson4sJackson     avgt   10   1,251 ±  0,021  ms/op
+[info] BigJsonBenchmarkSerialize.runJson4sNative      avgt   10   1,232 ±  0,031  ms/op
+[info] BigJsonBenchmarkSerialize.runArgonautJson      avgt   10   1,150 ±  0,027  ms/op
+[info] BigJsonBenchmarkSerialize.runPlayJson          avgt   10   0,936 ±  0,206  ms/op
+[info] BigJsonBenchmarkSerialize.runCirce             avgt   10   0,708 ±  0,147  ms/op
+[info] BigJsonBenchmarkSerialize.runSprayJson         avgt   10   0,541 ±  0,098  ms/op
+[info] BigJsonBenchmarkSerialize.runSphereJson        avgt   10   0,390 ±  0,177  ms/op
+[info] BigJsonBenchmarkSerialize.runJacksonParsing    avgt   10   0,113 ±  0,017  ms/op
+[info] BigJsonBenchmarkSerialize.runJsoniter          avgt   10   0,076 ±  0,013  ms/op
 ```
 _ordered (lower is better)_
 
@@ -72,37 +75,41 @@ _ordered (lower is better)_
 
 ```
 [info] Benchmark                                                                                      Mode  Cnt        Score        Error   Units
-[info] BigJsonBenchmarkDeserialize.runArgonautJson:·gc.alloc.rate.norm                                avgt   10  2859249,582 ±      5,490    B/op
-[info] BigJsonBenchmarkDeserialize.runArgonautJson:·gc.count                                          avgt   10      120,000               counts
-[info] BigJsonBenchmarkDeserialize.runArgonautJson:·gc.time                                           avgt   10      100,000                   ms
+[info] BigJsonBenchmarkDeserialize.runArgonautJson:·gc.alloc.rate.norm                                avgt   10  2843273,620 ±      5,573    B/op
+[info] BigJsonBenchmarkDeserialize.runArgonautJson:·gc.count                                          avgt   10      116,000               counts
+[info] BigJsonBenchmarkDeserialize.runArgonautJson:·gc.time                                           avgt   10       97,000                   ms
 
-[info] BigJsonBenchmarkDeserialize.runCirce:·gc.alloc.rate.norm                                       avgt   10  1437025,005 ±      3,418    B/op
-[info] BigJsonBenchmarkDeserialize.runCirce:·gc.count                                                 avgt   10      129,000               counts
-[info] BigJsonBenchmarkDeserialize.runCirce:·gc.time                                                  avgt   10       92,000                   ms
+[info] BigJsonBenchmarkDeserialize.runCirce:·gc.alloc.rate.norm                                       avgt   10  1116704,716 ±      2,435    B/op
+[info] BigJsonBenchmarkDeserialize.runCirce:·gc.count                                                 avgt   10      119,000               counts
+[info] BigJsonBenchmarkDeserialize.runCirce:·gc.time                                                  avgt   10       93,000                   ms
 
-[info] BigJsonBenchmarkDeserialize.runJacksonParsing:·gc.alloc.rate.norm                              avgt   10   123528,702 ±     12,790    B/op
-[info] BigJsonBenchmarkDeserialize.runJacksonParsing:·gc.count                                        avgt   10       28,000               counts
-[info] BigJsonBenchmarkDeserialize.runJacksonParsing:·gc.time                                         avgt   10       20,000                   ms
+[info] BigJsonBenchmarkDeserialize.runJacksonParsing:·gc.alloc.rate.norm                              avgt   10   123528,033 ±     12,657    B/op
+[info] BigJsonBenchmarkDeserialize.runJacksonParsing:·gc.count                                        avgt   10       33,000               counts
+[info] BigJsonBenchmarkDeserialize.runJacksonParsing:·gc.time                                         avgt   10       22,000                   ms
 
-[info] BigJsonBenchmarkDeserialize.runJson4sJackson:·gc.alloc.rate.norm                               avgt   10  2145424,671 ±     92,383    B/op
-[info] BigJsonBenchmarkDeserialize.runJson4sJackson:·gc.count                                         avgt   10       79,000               counts
-[info] BigJsonBenchmarkDeserialize.runJson4sJackson:·gc.time                                          avgt   10       72,000                   ms
+[info] BigJsonBenchmarkDeserialize.runJson4sJackson:·gc.alloc.rate.norm                               avgt   10  2145450,477 ±     66,969    B/op
+[info] BigJsonBenchmarkDeserialize.runJson4sJackson:·gc.count                                         avgt   10       67,000               counts
+[info] BigJsonBenchmarkDeserialize.runJson4sJackson:·gc.time                                          avgt   10       62,000                   ms
 
-[info] BigJsonBenchmarkDeserialize.runJson4sNative:·gc.alloc.rate.norm                                avgt   10  2417394,260 ±     49,153    B/op
-[info] BigJsonBenchmarkDeserialize.runJson4sNative:·gc.count                                          avgt   10       92,000               counts
-[info] BigJsonBenchmarkDeserialize.runJson4sNative:·gc.time                                           avgt   10       85,000                   ms
+[info] BigJsonBenchmarkDeserialize.runJson4sNative:·gc.alloc.rate.norm                                avgt   10  2513443,744 ±     69,035    B/op
+[info] BigJsonBenchmarkDeserialize.runJson4sNative:·gc.count                                          avgt   10       89,000               counts
+[info] BigJsonBenchmarkDeserialize.runJson4sNative:·gc.time                                           avgt   10       83,000                   ms
 
-[info] BigJsonBenchmarkDeserialize.runPlayJson:·gc.alloc.rate.norm                                    avgt   10  3080915,701 ±     24,501    B/op
-[info] BigJsonBenchmarkDeserialize.runPlayJson:·gc.count                                              avgt   10      106,000               counts
-[info] BigJsonBenchmarkDeserialize.runPlayJson:·gc.time                                               avgt   10       83,000                   ms
+[info] BigJsonBenchmarkDeserialize.runJsoniter:·gc.alloc.rate.norm                                    avgt   10   192345,065 ±     12,036    B/op
+[info] BigJsonBenchmarkDeserialize.runJsoniter:·gc.count                                              avgt   10       95,000               counts
+[info] BigJsonBenchmarkDeserialize.runJsoniter:·gc.time                                               avgt   10       58,000                   ms
 
-[info] BigJsonBenchmarkDeserialize.runSphereJson:·gc.alloc.rate.norm                                  avgt   10  1117104,923 ±      3,261    B/op
-[info] BigJsonBenchmarkDeserialize.runSphereJson:·gc.count                                            avgt   10       82,000               counts
-[info] BigJsonBenchmarkDeserialize.runSphereJson:·gc.time                                             avgt   10       68,000                   ms
+[info] BigJsonBenchmarkDeserialize.runPlayJson:·gc.alloc.rate.norm                                    avgt   10  2944850,680 ±     81,099    B/op
+[info] BigJsonBenchmarkDeserialize.runPlayJson:·gc.count                                              avgt   10       75,000               counts
+[info] BigJsonBenchmarkDeserialize.runPlayJson:·gc.time                                               avgt   10       73,000                   ms
 
-[info] BigJsonBenchmarkDeserialize.runSprayJson:·gc.alloc.rate.norm                                   avgt   10   403672,579 ±      1,971    B/op
-[info] BigJsonBenchmarkDeserialize.runSprayJson:·gc.count                                             avgt   10       63,000               counts
-[info] BigJsonBenchmarkDeserialize.runSprayJson:·gc.time                                              avgt   10       40,000                   ms
+[info] BigJsonBenchmarkDeserialize.runSphereJson:·gc.alloc.rate.norm                                  avgt   10   877024,809 ±      2,654    B/op
+[info] BigJsonBenchmarkDeserialize.runSphereJson:·gc.count                                            avgt   10       64,000               counts
+[info] BigJsonBenchmarkDeserialize.runSphereJson:·gc.time                                             avgt   10       63,000                   ms
+
+[info] BigJsonBenchmarkDeserialize.runSprayJson:·gc.alloc.rate.norm                                   avgt   10   403672,643 ±      2,202    B/op
+[info] BigJsonBenchmarkDeserialize.runSprayJson:·gc.count                                             avgt   10       59,000               counts
+[info] BigJsonBenchmarkDeserialize.runSprayJson:·gc.time                                              avgt   10       42,000                   ms
 ```
 _not ordered (lower is better)_
 
@@ -110,36 +117,40 @@ _not ordered (lower is better)_
 
 ```
 [info] Benchmark                                                                                      Mode  Cnt        Score        Error   Units
-[info] BigJsonBenchmarkSerialize.runArgonautJson:·gc.alloc.rate.norm                                  avgt   10  1347961,213 ±      3,708    B/op
-[info] BigJsonBenchmarkSerialize.runArgonautJson:·gc.count                                            avgt   10      112,000               counts
-[info] BigJsonBenchmarkSerialize.runArgonautJson:·gc.time                                             avgt   10       87,000                   ms
+[info] BigJsonBenchmarkSerialize.runArgonautJson:·gc.alloc.rate.norm                                  avgt   10  2057193,690 ±      5,771    B/op
+[info] BigJsonBenchmarkSerialize.runArgonautJson:·gc.count                                            avgt   10      113,000               counts
+[info] BigJsonBenchmarkSerialize.runArgonautJson:·gc.time                                             avgt   10       93,000                   ms
 
-[info] BigJsonBenchmarkSerialize.runCirce:·gc.alloc.rate.norm                                         avgt   10  1444512,984 ±      3,368    B/op
-[info] BigJsonBenchmarkSerialize.runCirce:·gc.count                                                   avgt   10      134,000               counts
-[info] BigJsonBenchmarkSerialize.runCirce:·gc.time                                                    avgt   10       81,000                   ms
+[info] BigJsonBenchmarkSerialize.runCirce:·gc.alloc.rate.norm                                         avgt   10  1060209,126 ±      4,016    B/op
+[info] BigJsonBenchmarkSerialize.runCirce:·gc.count                                                   avgt   10       96,000               counts
+[info] BigJsonBenchmarkSerialize.runCirce:·gc.time                                                    avgt   10       73,000                   ms
 
-[info] BigJsonBenchmarkSerialize.runJacksonParsing:·gc.alloc.rate.norm                                avgt   10    46439,981 ±      0,977    B/op
-[info] BigJsonBenchmarkSerialize.runJacksonParsing:·gc.count                                          avgt   10       29,000               counts
-[info] BigJsonBenchmarkSerialize.runJacksonParsing:·gc.time                                           avgt   10       19,000                   ms
+[info] BigJsonBenchmarkSerialize.runJacksonParsing:·gc.alloc.rate.norm                                avgt   10    46439,947 ±      1,167    B/op
+[info] BigJsonBenchmarkSerialize.runJacksonParsing:·gc.count                                          avgt   10       26,000               counts
+[info] BigJsonBenchmarkSerialize.runJacksonParsing:·gc.time                                           avgt   10       21,000                   ms
 
-[info] BigJsonBenchmarkSerialize.runJson4sJackson:·gc.alloc.rate.norm                                 avgt   10  1351249,699 ±      5,749    B/op
-[info] BigJsonBenchmarkSerialize.runJson4sJackson:·gc.count                                           avgt   10       73,000               counts
-[info] BigJsonBenchmarkSerialize.runJson4sJackson:·gc.time                                            avgt   10       60,000                   ms
+[info] BigJsonBenchmarkSerialize.runJson4sJackson:·gc.alloc.rate.norm                                 avgt   10  1351249,832 ±      6,288    B/op
+[info] BigJsonBenchmarkSerialize.runJson4sJackson:·gc.count                                           avgt   10       68,000               counts
+[info] BigJsonBenchmarkSerialize.runJson4sJackson:·gc.time                                            avgt   10       53,000                   ms
 
-[info] BigJsonBenchmarkSerialize.runJson4sNative:·gc.alloc.rate.norm                                  avgt   10  1983353,700 ±      5,852    B/op
-[info] BigJsonBenchmarkSerialize.runJson4sNative:·gc.count                                            avgt   10      107,000               counts
-[info] BigJsonBenchmarkSerialize.runJson4sNative:·gc.time                                             avgt   10       63,000                   ms
+[info] BigJsonBenchmarkSerialize.runJson4sNative:·gc.alloc.rate.norm                                  avgt   10  1983353,820 ±      6,271    B/op
+[info] BigJsonBenchmarkSerialize.runJson4sNative:·gc.count                                            avgt   10      102,000               counts
+[info] BigJsonBenchmarkSerialize.runJson4sNative:·gc.time                                             avgt   10       66,000                   ms
 
-[info] BigJsonBenchmarkSerialize.runPlayJson:·gc.alloc.rate.norm                                      avgt   10  1529761,038 ±      3,562    B/op
-[info] BigJsonBenchmarkSerialize.runPlayJson:·gc.count                                                avgt   10       93,000               counts
-[info] BigJsonBenchmarkSerialize.runPlayJson:·gc.time                                                 avgt   10       67,000                   ms
+[info] BigJsonBenchmarkSerialize.runJsoniter:·gc.alloc.rate.norm                                      avgt   10   113000,111 ±      0,383    B/op
+[info] BigJsonBenchmarkSerialize.runJsoniter:·gc.count                                                avgt   10       96,000               counts
+[info] BigJsonBenchmarkSerialize.runJsoniter:·gc.time                                                 avgt   10       56,000                   ms
 
-[info] BigJsonBenchmarkSerialize.runSphereJson:·gc.alloc.rate.norm                                    avgt   10   543728,475 ±      1,506    B/op
-[info] BigJsonBenchmarkSerialize.runSphereJson:·gc.count                                              avgt   10       94,000               counts
-[info] BigJsonBenchmarkSerialize.runSphereJson:·gc.time                                               avgt   10       81,000                   ms
+[info] BigJsonBenchmarkSerialize.runPlayJson:·gc.alloc.rate.norm                                      avgt   10  1529761,419 ±      4,898    B/op
+[info] BigJsonBenchmarkSerialize.runPlayJson:·gc.count                                                avgt   10       68,000               counts
+[info] BigJsonBenchmarkSerialize.runPlayJson:·gc.time                                                 avgt   10       69,000                   ms
 
-[info] BigJsonBenchmarkSerialize.runSprayJson:·gc.alloc.rate.norm                                     avgt   10   626672,730 ±      2,533    B/op
-[info] BigJsonBenchmarkSerialize.runSprayJson:·gc.count                                               avgt   10       83,000               counts
-[info] BigJsonBenchmarkSerialize.runSprayJson:·gc.time                                                avgt   10       49,000                   ms
+[info] BigJsonBenchmarkSerialize.runSphereJson:·gc.alloc.rate.norm                                    avgt   10   543760,895 ±      3,581    B/op
+[info] BigJsonBenchmarkSerialize.runSphereJson:·gc.count                                              avgt   10       64,000               counts
+[info] BigJsonBenchmarkSerialize.runSphereJson:·gc.time                                               avgt   10       70,000                   ms
+
+[info] BigJsonBenchmarkSerialize.runSprayJson:·gc.alloc.rate.norm                                     avgt   10   626608,731 ±      2,413    B/op
+[info] BigJsonBenchmarkSerialize.runSprayJson:·gc.count                                               avgt   10       74,000               counts
+[info] BigJsonBenchmarkSerialize.runSprayJson:·gc.time                                                avgt   10       50,000                   ms
 ```
 _not ordered (lower is better)_

@@ -1,4 +1,5 @@
 package jsonperf
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
 
 case class Person(name: String, age: Int)
 case class BigJson(colleagues: Vector[Person])
@@ -53,6 +54,13 @@ class BigJsonTest extends JsonTest[BigJson] with Serializable {
     implicit val personDecoder = deriveDecoder[Person]
     deriveDecoder[BigJson]
   }
+
+
+  override def jsoniterCodec: JsonValueCodec[BigJson] = {
+    import com.github.plokhotnyuk.jsoniter_scala.macros._
+    JsonCodecMaker.make[BigJson](CodecMakerConfig())
+  }
+
   override def checkResult(result: BigJson): Unit = {
     assert(result.colleagues.size == total, s"result.colleagues.size(${result.colleagues.size}) != $total")
     for (i ← 1 to 1000) {
