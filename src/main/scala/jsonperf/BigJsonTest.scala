@@ -1,5 +1,6 @@
 package jsonperf
 import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import upickle.default
 
 case class Person(name: String, age: Int)
 case class BigJson(colleagues: Vector[Person])
@@ -59,6 +60,13 @@ class BigJsonTest extends JsonTest[BigJson] with Serializable {
   override def jsoniterCodec: JsonValueCodec[BigJson] = {
     import com.github.plokhotnyuk.jsoniter_scala.macros._
     JsonCodecMaker.make[BigJson](CodecMakerConfig())
+  }
+
+
+  override def uJsonRW: default.ReadWriter[BigJson] = {
+    import upickle.default.{ReadWriter => RW, macroRW}
+    implicit val personRW: RW[Person] = macroRW
+    upickle.default.macroRW
   }
 
   override def checkResult(result: BigJson): Unit = {

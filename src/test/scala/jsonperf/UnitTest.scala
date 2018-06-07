@@ -15,7 +15,7 @@ class UnitTest extends FreeSpec with Matchers with TableDrivenPropertyChecks {
       import test._
       val jsonParsings = Table(
         "parser",
-        argonautJson, jacksonParsing, json4sJackson, json4sNative, playJson, sphereJson, sprayJson, circeJson, jsoniter)
+        argonautJson, jacksonParsing, json4sJackson, json4sNative, playJson, sphereJson, sprayJson, circeJson, jsoniter, uJson)
 
       forAll(jsonParsings) { jsonParsing ⇒
         s"using parser '$jsonParsing'" - {

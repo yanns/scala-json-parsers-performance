@@ -16,6 +16,8 @@ abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) ext
   def circeEncoder: io.circe.Encoder[A]
   def circeDecoder: io.circe.Decoder[A]
   def jsoniterCodec: JsonValueCodec[A]
+  def uJsonRW: upickle.default.ReadWriter[A]
+
   def checkResult(result: A): Unit
 
 
@@ -136,5 +138,16 @@ abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) ext
       new String(writeToArray(a)(codec), StandardCharsets.UTF_8)
     }
     override def toString(): String = "jsoniter"
+  }
+
+  val uJson: Parsing = new Parsing {
+    override def deserialize(s: String): A = {
+      upickle.default.read[A](s)(uJsonRW)
+    }
+
+    override def serialize(a: A): String = {
+      upickle.default.write[A](a)(uJsonRW)
+    }
+    override def toString(): String = "uJson"
   }
 }

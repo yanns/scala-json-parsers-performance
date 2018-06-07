@@ -42,6 +42,9 @@ abstract class JmhBenchmarks[A <: AnyRef](val test: JsonTest[A]) {
 
   @Benchmark
   def runJsoniter() = runTest(jsoniter)
+
+  @Benchmark
+  def runUJson() = runTest(uJson)
 }
 
 class BigJsonBenchmarkDeserialize extends JmhBenchmarks(new BigJsonTest) {

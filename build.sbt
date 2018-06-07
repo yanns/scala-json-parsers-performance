@@ -22,6 +22,7 @@ libraryDependencies ++=
   "io.spray"                              %% "spray-json"           % "1.3.4"       ::
   "io.argonaut"                           %% "argonaut"             % "6.2.2"       ::
   "com.github.plokhotnyuk.jsoniter-scala" %% "macros"               % "0.28.0"      ::
+  "com.lihaoyi"                           %% "upickle"              % "0.6.6"       ::
   Nil
 
 libraryDependencies ++=
