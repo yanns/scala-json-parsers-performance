@@ -13,38 +13,41 @@ abstract class JmhBenchmarks[A <: AnyRef](val test: JsonTest[A]) {
 
   def runTest(implementation: JsonParsing[A]): Unit
 
-  @Benchmark
-  def runNoParsing() = runTest(noParsing)
-
-  @Benchmark
-  def runJacksonParsing() = runTest(jacksonParsing)
-
-  @Benchmark
-  def runJson4sNative() = runTest(json4sNative)
-
-  @Benchmark
-  def runJson4sJackson() = runTest(json4sJackson)
-
-  @Benchmark
-  def runSphereJson() = runTest(sphereJson)
-
-  @Benchmark
-  def runPlayJson() = runTest(playJson)
-
-  @Benchmark
-  def runSprayJson() = runTest(sprayJson)
-
-  @Benchmark
-  def runArgonautJson() = runTest(argonautJson)
-
+//  @Benchmark
+//  def runNoParsing() = runTest(noParsing)
+//
+//  @Benchmark
+//  def runJacksonParsing() = runTest(jacksonParsing)
+//
+//  @Benchmark
+//  def runJson4sNative() = runTest(json4sNative)
+//
+//  @Benchmark
+//  def runJson4sJackson() = runTest(json4sJackson)
+//
+//  @Benchmark
+//  def runSphereJson() = runTest(sphereJson)
+//
+//  @Benchmark
+//  def runPlayJson() = runTest(playJson)
+//
+//  @Benchmark
+//  def runSprayJson() = runTest(sprayJson)
+//
+//  @Benchmark
+//  def runArgonautJson() = runTest(argonautJson)
+//
   @Benchmark
   def runCirce() = runTest(circeJson)
+//
+//  @Benchmark
+//  def runJsoniter() = runTest(jsoniter)
+//
+//  @Benchmark
+//  def runUJson() = runTest(uJson)
 
   @Benchmark
-  def runJsoniter() = runTest(jsoniter)
-
-  @Benchmark
-  def runUJson() = runTest(uJson)
+  def runSerde() = runTest(serdeJson)
 }
 
 class BigJsonBenchmarkDeserialize extends JmhBenchmarks(new BigJsonTest) {

@@ -1,5 +1,6 @@
 package jsonperf
 import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import serde.{Serialize, Serializer}
 import upickle.default
 
 case class Person(name: String, age: Int)
@@ -67,6 +68,23 @@ class BigJsonTest extends JsonTest[BigJson] with Serializable {
     import upickle.default.{ReadWriter => RW, macroRW}
     implicit val personRW: RW[Person] = macroRW
     upickle.default.macroRW
+  }
+
+  override def serdeSerialize: Serialize[BigJson] = new Serialize[BigJson]{
+    import serde.DefaultSerialize._
+    implicit val personSerialize: Serialize[Person] = new Serialize[Person] {
+      override def serialize(a: Person, serializer: Serializer): Unit = {
+        val map = serializer.serializeMap()
+        map.add("name", a.name)
+        map.add("age", a.age)
+        map.end()
+      }
+    }
+    override def serialize(a: BigJson, serializer: Serializer): Unit = {
+      val map = serializer.serializeMap()
+      map.add("colleagues", a.colleagues)
+      map.end()
+    }
   }
 
   override def checkResult(result: BigJson): Unit = {
