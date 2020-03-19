@@ -1,20 +1,25 @@
 package jsonperf
+
 import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import refuel.json.{Codec, CodecDef}
 import upickle.default
 
 case class Person(name: String, age: Int)
+
 case class BigJson(colleagues: Vector[Person])
 
-class BigJsonTest extends JsonTest[BigJson] with Serializable {
+class BigJsonTest extends JsonTest[BigJson] with Serializable with CodecDef {
 
   val total = 1000
+
   def colleagues = (for (i ← 1 to 1000) yield s"""{"name": "person-$i", "age": $i}""").mkString(", ")
+
   val json =
     s"""{
-      |  "colleagues": [
-      |    $colleagues
-      |  ]
-      |}
+       |  "colleagues": [
+       |    $colleagues
+       |  ]
+       |}
     """.stripMargin
 
   override val newA = BigJson(colleagues = (for (i ← 1 to 1000) yield Person(s"person-$i", i)).toVector)
@@ -64,7 +69,7 @@ class BigJsonTest extends JsonTest[BigJson] with Serializable {
 
 
   override def uJsonRW: default.ReadWriter[BigJson] = {
-    import upickle.default.{ReadWriter => RW, macroRW}
+    import upickle.default.{macroRW, ReadWriter => RW}
     implicit val personRW: RW[Person] = macroRW
     upickle.default.macroRW
   }
@@ -77,5 +82,7 @@ class BigJsonTest extends JsonTest[BigJson] with Serializable {
       assert(c.age == i)
     }
   }
+
+  override def refuelCodec: Codec[BigJson] = CaseClassCodec.from[BigJson]
 }
 
