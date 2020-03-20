@@ -4,7 +4,6 @@ import refuel.json.{Codec, CodecDef}
 import upickle.default
 
 case class Person(name: String, age: Int)
-
 case class BigJson(colleagues: Vector[Person])
 
 class BigJsonTest extends JsonTest[BigJson] with Serializable with CodecDef {

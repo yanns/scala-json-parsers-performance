@@ -10,7 +10,7 @@ val circeVersion = "0.9.3"
 
 resolvers += Resolver.bintrayRepo("commercetools", "maven")
 
-libraryDependencies ++= 
+libraryDependencies ++=
   "io.circe"                              %% "circe-core"           % circeVersion  ::
   "io.circe"                              %% "circe-generic"        % circeVersion  ::
   "io.circe"                              %% "circe-parser"         % circeVersion  ::
