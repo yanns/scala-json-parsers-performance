@@ -8,56 +8,80 @@ import org.openjdk.jmh.annotations._
 @State(Scope.Benchmark)
 @BenchmarkMode(Array(Mode.AverageTime))
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-abstract class JmhBenchmarks[A <: AnyRef](val test: JsonTest[A]) {
+@Warmup(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 1, jvmArgs = Array(
+  "-server",
+  "-Xms1g",
+  "-Xmx1g",
+  "-XX:NewSize=512m",
+  "-XX:MaxNewSize=512m",
+  "-XX:InitialCodeCacheSize=256m",
+  "-XX:ReservedCodeCacheSize=256m",
+  "-XX:+UseParallelGC",
+  "-XX:-UseAdaptiveSizePolicy",
+  "-XX:MaxInlineLevel=18",
+  "-XX:-UseBiasedLocking",
+  "-XX:+AlwaysPreTouch",
+  "-XX:+UseNUMA",
+  "-XX:-UseAdaptiveNUMAChunkSizing"
+))
+abstract class JmhBenchmarks[A <: AnyRef, B](val test: JsonTest[A]) {
   import test._
 
-  def runTest(implementation: JsonParsing[A]): Unit
+  def runTest(implementation: JsonParsing[A]): B
 
   @Benchmark
-  def runRefuelParsing() = runTest(refuelParsing)
+  def runRefuelParsing: B = runTest(refuelParsing)
 
   @Benchmark
-  def runNoParsing() = runTest(noParsing)
+  def runNoParsing: B = runTest(noParsing)
 
   @Benchmark
-  def runJacksonParsing() = runTest(jacksonParsing)
+  def runJacksonParsing: B = runTest(jacksonParsing)
 
   @Benchmark
-  def runJson4sNative() = runTest(json4sNative)
+  def runJson4sNative: B = runTest(json4sNative)
 
   @Benchmark
-  def runJson4sJackson() = runTest(json4sJackson)
+  def runJson4sJackson: B = runTest(json4sJackson)
 
   @Benchmark
-  def runSphereJson() = runTest(sphereJson)
+  def runSphereJson: B = runTest(sphereJson)
 
   @Benchmark
-  def runPlayJson() = runTest(playJson)
+  def runPlayJson: B = runTest(playJson)
 
   @Benchmark
-  def runSprayJson() = runTest(sprayJson)
+  def runSprayJson: B = runTest(sprayJson)
 
   @Benchmark
-  def runArgonautJson() = runTest(argonautJson)
+  def runArgonautJson: B = runTest(argonautJson)
 
   @Benchmark
-  def runCirce() = runTest(circeJson)
+  def runCirce: B = runTest(circeJson)
 
   @Benchmark
-  def runJsoniter() = runTest(jsoniter)
+  def runJsoniter: B = runTest(jsoniter)
 
   @Benchmark
-  def runUJson() = runTest(uJson)
+  def runUPickle: B = runTest(uPickle)
+
+  @Benchmark
+  def runWeePickle: B = runTest(weePickle)
+
+  @Benchmark
+  def runBorer: B = runTest(borer)
 }
 
-class BigJsonBenchmarkDeserialize extends JmhBenchmarks(new BigJsonTest) {
-  def runTest(implementation: JsonParsing[BigJson]): Unit = {
+class BigJsonBenchmarkDeserialize extends JmhBenchmarks[BigJson, BigJson](new BigJsonTest) {
+  def runTest(implementation: JsonParsing[BigJson]): BigJson = {
     implementation.deserialize(test.json)
   }
 }
 
-class BigJsonBenchmarkSerialize extends JmhBenchmarks(new BigJsonTest) {
-  def runTest(implementation: JsonParsing[BigJson]): Unit = {
+class BigJsonBenchmarkSerialize extends JmhBenchmarks[BigJson, String](new BigJsonTest) {
+  def runTest(implementation: JsonParsing[BigJson]): String = {
     implementation.serialize(test.newA)
   }
 }

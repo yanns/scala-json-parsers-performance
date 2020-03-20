@@ -1,7 +1,5 @@
 package jsonperf
-import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
-import refuel.json.{Codec, CodecDef}
-import upickle.default
+import refuel.json.CodecDef
 
 case class Person(name: String, age: Int)
 case class BigJson(colleagues: Vector[Person])
@@ -58,17 +56,30 @@ class BigJsonTest extends JsonTest[BigJson] with Serializable with CodecDef {
   }
 
 
-  override def jsoniterCodec: JsonValueCodec[BigJson] = {
+  override def jsoniterCodec = {
     import com.github.plokhotnyuk.jsoniter_scala.macros._
-    JsonCodecMaker.make[BigJson](CodecMakerConfig())
+    JsonCodecMaker.make[BigJson](CodecMakerConfig)
   }
 
-
-  override def uJsonRW: default.ReadWriter[BigJson] = {
+  override def uPickleRW = {
     import upickle.default.{ReadWriter => RW, macroRW}
     implicit val personRW: RW[Person] = macroRW
     upickle.default.macroRW
   }
+
+  override def weePickleFromTo = {
+    import com.rallyhealth.weepickle.v1.WeePickle._
+    implicit val personFromTo: FromTo[Person] = macroFromTo[Person]
+    macroFromTo[BigJson]
+  }
+
+  override def borerCodec = {
+    import io.bullet.borer.derivation.MapBasedCodecs
+    implicit val personCodec: io.bullet.borer.Codec[Person] = MapBasedCodecs.deriveCodec[Person]
+    MapBasedCodecs.deriveCodec[BigJson]
+  }
+
+  override def refuelCodec = CaseClassCodec.from[BigJson]
 
   override def checkResult(result: BigJson): Unit = {
     assert(result.colleagues.size == total, s"result.colleagues.size(${result.colleagues.size}) != $total")
@@ -78,7 +89,4 @@ class BigJsonTest extends JsonTest[BigJson] with Serializable with CodecDef {
       assert(c.age == i)
     }
   }
-
-  override def refuelCodec: Codec[BigJson] = CaseClassCodec.from[BigJson]
 }
-
