@@ -3,12 +3,14 @@ package jsonperf
 import java.nio.charset.StandardCharsets
 
 import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import refuel.json.{Codec, JsonTransform}
 
 abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) extends Serializable {
 
   def json: String
   def newA: A
   def clazz: Class[A]
+  def refuelCodec: Codec[A]
   def sphereJSON: io.sphere.json.JSON[A]
   def playFormat: play.api.libs.json.Format[A]
   def sprayJsonFormat: spray.json.JsonFormat[A]
@@ -22,6 +24,13 @@ abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) ext
 
 
   type Parsing = JsonParsing[A]
+
+  val refuelParsing = new Parsing with JsonTransform {
+    val codec: Codec[A] = refuelCodec
+    override def deserialize(json: String): A = json.as[A](codec).right.get
+    override def serialize(a: A): String = a.toJString(codec)
+    override def toString(): String = "refuelParsing"
+  }
 
   val noParsing: Parsing = new Parsing {
     override def deserialize(json: String): A = newA

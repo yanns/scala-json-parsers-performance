@@ -14,6 +14,9 @@ abstract class JmhBenchmarks[A <: AnyRef](val test: JsonTest[A]) {
   def runTest(implementation: JsonParsing[A]): Unit
 
   @Benchmark
+  def runRefuelParsing() = runTest(refuelParsing)
+
+  @Benchmark
   def runNoParsing() = runTest(noParsing)
 
   @Benchmark

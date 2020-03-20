@@ -23,6 +23,7 @@ libraryDependencies ++=
   "io.argonaut"                           %% "argonaut"             % "6.2.2"       ::
   "com.github.plokhotnyuk.jsoniter-scala" %% "macros"               % "0.28.0"      ::
   "com.lihaoyi"                           %% "upickle"              % "0.6.6"       ::
+  "com.phylage"                           %% "refuel-json"          % "1.0.1"       ::
   Nil
 
 libraryDependencies ++=
