@@ -16,10 +16,10 @@ class BigJsonTest extends JsonTest[BigJson] with Serializable with CodecDef {
 
   val json =
     s"""{
-       |  "colleagues": [
-       |    $colleagues
-       |  ]
-       |}
+      |  "colleagues": [
+      |    $colleagues
+      |  ]
+      |}
     """.stripMargin
 
   override val newA = BigJson(colleagues = (for (i ← 1 to 1000) yield Person(s"person-$i", i)).toVector)
@@ -69,7 +69,7 @@ class BigJsonTest extends JsonTest[BigJson] with Serializable with CodecDef {
 
 
   override def uJsonRW: default.ReadWriter[BigJson] = {
-    import upickle.default.{macroRW, ReadWriter => RW}
+    import upickle.default.{ReadWriter => RW, macroRW}
     implicit val personRW: RW[Person] = macroRW
     upickle.default.macroRW
   }
