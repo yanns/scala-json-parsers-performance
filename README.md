@@ -15,7 +15,6 @@ Compares performance of several JSON parsers used in Scala:
 - [uJson](http://www.lihaoyi.com/upickle/#uJson)
 - [refuel-json](https://github.com/giiita/refuel)
 
-
 The test case is to deserialize a json into a case class and to serialize back to json.
 
 The performances are measured with [JMH](https://github.com/ktoso/sbt-jmh)
@@ -82,7 +81,6 @@ _ordered (lower is better)_
 
 ```
 Benchmark                                                                       Mode  Cnt        Score         Error   Units
-
 BigJsonBenchmarkDeserialize.runPlayJson:·gc.alloc.rate.norm                     avgt   10  2951583.883 ±      16.612    B/op
 BigJsonBenchmarkDeserialize.runPlayJson:·gc.count                               avgt   10       22.000                counts
 BigJsonBenchmarkDeserialize.runPlayJson:·gc.time                                avgt   10       34.000                    ms

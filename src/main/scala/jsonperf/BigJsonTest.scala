@@ -1,5 +1,4 @@
 package jsonperf
-
 import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
 import refuel.json.{Codec, CodecDef}
 import upickle.default
@@ -11,9 +10,7 @@ case class BigJson(colleagues: Vector[Person])
 class BigJsonTest extends JsonTest[BigJson] with Serializable with CodecDef {
 
   val total = 1000
-
   def colleagues = (for (i ← 1 to 1000) yield s"""{"name": "person-$i", "age": $i}""").mkString(", ")
-
   val json =
     s"""{
       |  "colleagues": [
