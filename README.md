@@ -12,7 +12,7 @@ Compares performance of several JSON parsers used in Scala:
 - [sphere-json](https://github.com/sphereio/sphere-scala-libs/tree/master/json)
 - [spray-json](https://github.com/spray/spray-json)
 - [jsoniter-scala](https://github.com/plokhotnyuk/jsoniter-scala)
-- [uJson](http://www.lihaoyi.com/upickle/#uJson)
+- [uPickle](http://www.lihaoyi.com/upickle)
 - [refuel-json](https://github.com/giiita/refuel)
 
 The test case is to deserialize a json into a case class and to serialize back to json.
