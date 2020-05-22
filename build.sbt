@@ -18,7 +18,7 @@ libraryDependencies ++=
   "com.fasterxml.jackson.module"          %% "jackson-module-scala"  % "2.10.3"      ::
   "org.json4s"                            %% "json4s-native"         % json4sVersion ::
   "org.json4s"                            %% "json4s-jackson"        % json4sVersion ::
-  "io.sphere"                             %% "sphere-json"           % "0.11.2"      ::
+  "io.sphere"                             %% "sphere-json"           % "0.11.5"      ::
   "com.typesafe.play"                     %% "play-json"             % "2.8.1"       ::
   "io.spray"                              %% "spray-json"            % "1.3.5"       ::
   "io.argonaut"                           %% "argonaut"              % "6.2.5"       ::
