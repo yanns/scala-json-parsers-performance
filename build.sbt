@@ -25,7 +25,7 @@ libraryDependencies ++=
   "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % "2.1.7"       ::
   "com.lihaoyi"                           %% "upickle"               % "1.0.0"       ::
   "com.phylage"                           %% "refuel-json"           % "1.0.1"       ::
-  "io.bullet"                             %% "borer-derivation"      % "1.5.0"       ::
+  "io.bullet"                             %% "borer-derivation"      % "1.6.0"       ::
   "com.rallyhealth"                       %% "weepickle-v1"          % "1.0.1"       ::
   Nil
 
