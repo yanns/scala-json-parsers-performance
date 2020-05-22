@@ -33,7 +33,7 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.sbt
-        key: ${{ runner.os }}-sbt-${{ hashFiles('**/build.sbt') }
+        key: ${{ runner.os }}-sbt-${{ hashFiles('**/build.sbt') }}
 
     - uses: actions/checkout@v2
 
