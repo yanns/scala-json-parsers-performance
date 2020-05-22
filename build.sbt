@@ -2,9 +2,9 @@ name := """json-perf"""
 
 version := "1.0"
 
-scalaVersion := "2.12.11"
+scalaVersion := "2.13.2"
 
-val json4sVersion = "3.7.0-M2"
+val json4sVersion = "3.7.0-M4"
 val circeVersion = "0.13.0"
 
 resolvers ++=
@@ -15,7 +15,7 @@ resolvers ++=
 libraryDependencies ++=
   "io.circe"                              %% "circe-generic"         % circeVersion  ::
   "io.circe"                              %% "circe-parser"          % circeVersion  ::
-  "com.fasterxml.jackson.module"          %% "jackson-module-scala"  % "2.10.4"      ::
+  "com.fasterxml.jackson.module"          %% "jackson-module-scala"  % "2.11.0"      ::
   "org.json4s"                            %% "json4s-native"         % json4sVersion ::
   "org.json4s"                            %% "json4s-jackson"        % json4sVersion ::
   "io.sphere"                             %% "sphere-json"           % "0.11.5"      ::
