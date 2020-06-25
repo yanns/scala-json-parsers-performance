@@ -15,7 +15,7 @@ resolvers ++=
 libraryDependencies ++=
   "io.circe"                              %% "circe-generic"         % circeVersion  ::
   "io.circe"                              %% "circe-parser"          % circeVersion  ::
-  "com.fasterxml.jackson.module"          %% "jackson-module-scala"  % "2.11.0"      ::
+  "com.fasterxml.jackson.module"          %% "jackson-module-scala"  % "2.11.1"      ::
   "org.json4s"                            %% "json4s-native"         % json4sVersion ::
   "org.json4s"                            %% "json4s-jackson"        % json4sVersion ::
   "io.sphere"                             %% "sphere-json"           % "0.11.17"      ::
