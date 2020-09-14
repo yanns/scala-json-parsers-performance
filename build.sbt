@@ -21,7 +21,7 @@ libraryDependencies ++=
   "io.sphere"                             %% "sphere-json"           % "0.11.20"      ::
   "com.typesafe.play"                     %% "play-json"             % "2.9.1"       ::
   "io.spray"                              %% "spray-json"            % "1.3.5"       ::
-  "io.argonaut"                           %% "argonaut"              % "6.3.0"       ::
+  "io.argonaut"                           %% "argonaut"              % "6.3.1"       ::
   "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % "2.4.4"       ::
   "com.lihaoyi"                           %% "upickle"               % "1.2.0"       ::
   "com.phylage"                           %% "refuel-json"           % "1.3.14"       ::
