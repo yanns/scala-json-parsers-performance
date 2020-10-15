@@ -1,9 +1,10 @@
 package jsonperf
 
 import org.scalatest.prop.TableDrivenPropertyChecks
-import org.scalatest.{FreeSpec, Matchers, WordSpec}
+import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.matchers.should.Matchers
 
-class UnitTest extends FreeSpec with Matchers with TableDrivenPropertyChecks {
+class UnitTest extends AnyFreeSpec with Matchers with TableDrivenPropertyChecks {
 
   val tests = Table(
     "test",
