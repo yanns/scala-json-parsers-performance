@@ -12,13 +12,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v2
+    - uses: coursier/cache-action@v3
+
     - name: Set up Java SDK
       uses: actions/setup-java@v1
       with:
-        java-version: 12
-
-    - uses: actions/checkout@v2
-    - uses: coursier/cache-action@v3
+        java-version: 15
 
     - name: Run tests
       run: sbt test
