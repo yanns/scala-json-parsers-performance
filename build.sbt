@@ -19,7 +19,7 @@ libraryDependencies ++=
   "org.json4s"                            %% "json4s-native"         % json4sVersion ::
   "org.json4s"                            %% "json4s-jackson"        % json4sVersion ::
   "io.sphere"                             %% "sphere-json"           % "0.12.0"      ::
-  "com.typesafe.play"                     %% "play-json"             % "2.9.1"       ::
+  "com.typesafe.play"                     %% "play-json"             % "2.9.2"       ::
   "io.spray"                              %% "spray-json"            % "1.3.6"       ::
   "io.argonaut"                           %% "argonaut"              % "6.3.3"       ::
   "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % "2.6.2"       ::
