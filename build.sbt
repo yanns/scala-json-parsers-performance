@@ -26,7 +26,7 @@ libraryDependencies ++=
   "com.lihaoyi"                           %% "upickle"               % "1.2.2"       ::
   "com.phylage"                           %% "refuel-json"           % "1.4.7"       ::
   "io.bullet"                             %% "borer-derivation"      % "1.6.3"       ::
-  "com.rallyhealth"                       %% "weepickle-v1"          % "1.3.1"       ::
+  "com.rallyhealth"                       %% "weepickle-v1"          % "1.4.0"       ::
   Nil
 
 libraryDependencies ++=
