@@ -22,7 +22,7 @@ libraryDependencies ++=
   "com.typesafe.play"                     %% "play-json"             % "2.9.2"       ::
   "io.spray"                              %% "spray-json"            % "1.3.6"       ::
   "io.argonaut"                           %% "argonaut"              % "6.3.3"       ::
-  "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % "2.6.2"       ::
+  "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % "2.6.3"       ::
   "com.lihaoyi"                           %% "upickle"               % "1.2.3"       ::
   "com.phylage"                           %% "refuel-json"           % "1.4.7"       ::
   "io.bullet"                             %% "borer-derivation"      % "1.6.3"       ::
