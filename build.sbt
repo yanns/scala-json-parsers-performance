@@ -24,7 +24,7 @@ libraryDependencies ++=
   "io.argonaut"                           %% "argonaut"              % "6.3.3"       ::
   "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % "2.6.2"       ::
   "com.lihaoyi"                           %% "upickle"               % "1.2.3"       ::
-  "com.phylage"                           %% "refuel-json"           % "1.4.7"       ::
+  "com.phylage"                           %% "refuel-json"           % "1.4.9"       ::
   "io.bullet"                             %% "borer-derivation"      % "1.6.3"       ::
   "com.rallyhealth"                       %% "weepickle-v1"          % "1.4.0"       ::
   Nil
