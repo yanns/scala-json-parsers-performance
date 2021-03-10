@@ -23,14 +23,14 @@ libraryDependencies ++=
   "io.spray"                              %% "spray-json"            % "1.3.6"       ::
   "io.argonaut"                           %% "argonaut"              % "6.3.3"       ::
   "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % "2.6.4"       ::
-  "com.lihaoyi"                           %% "upickle"               % "1.2.3"       ::
+  "com.lihaoyi"                           %% "upickle"               % "1.3.0"       ::
   "com.phylage"                           %% "refuel-json"           % "1.4.11"       ::
   "io.bullet"                             %% "borer-derivation"      % "1.6.3"       ::
   "com.rallyhealth"                       %% "weepickle-v1"          % "1.4.0"       ::
   Nil
 
 libraryDependencies ++=
-  "org.scalatest"                         %% "scalatest"             % "3.2.3"       ::
+  "org.scalatest"                         %% "scalatest"             % "3.2.6"       ::
   Nil map (_ % Test)
 
 parallelExecution in Test := false
