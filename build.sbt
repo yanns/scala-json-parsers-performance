@@ -4,7 +4,7 @@ version := "1.0"
 
 scalaVersion := "2.13.5"
 
-val json4sVersion = "3.7.0-M11"
+val json4sVersion = "3.7.0-M12"
 val circeVersion = "0.13.0"
 
 resolvers ++=
