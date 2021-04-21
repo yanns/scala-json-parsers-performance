@@ -30,7 +30,7 @@ libraryDependencies ++=
   Nil
 
 libraryDependencies ++=
-  "org.scalatest"                         %% "scalatest"             % "3.2.7"       ::
+  "org.scalatest"                         %% "scalatest"             % "3.2.8"       ::
   Nil map (_ % Test)
 
 parallelExecution in Test := false
