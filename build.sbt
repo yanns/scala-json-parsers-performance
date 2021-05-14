@@ -23,7 +23,7 @@ libraryDependencies ++=
   "io.spray"                              %% "spray-json"            % "1.3.6"       ::
   "io.argonaut"                           %% "argonaut"              % "6.3.3"       ::
   "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % "2.8.1"       ::
-  "com.lihaoyi"                           %% "upickle"               % "1.3.12"      ::
+  "com.lihaoyi"                           %% "upickle"               % "1.3.13"      ::
   "com.phylage"                           %% "refuel-json"           % "1.4.11"       ::
   "io.bullet"                             %% "borer-derivation"      % "1.7.2"       ::
   "com.rallyhealth"                       %% "weepickle-v1"          % "1.4.1"       ::
