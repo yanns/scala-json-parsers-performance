@@ -49,7 +49,7 @@ abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) ext
     import org.json4s.native.Serialization
     implicit val formats = DefaultFormats
     override def deserialize(json: String): A = {
-      parse(json).extract[A]
+      org.json4s.native.JsonMethods.parse(json).extract[A]
     }
     override def serialize(a: A): String = {
       Serialization.write(a)
