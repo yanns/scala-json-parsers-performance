@@ -1,10 +1,9 @@
 package jsonperf
-import refuel.json.CodecDef
 
 case class Person(name: String, age: Int)
 case class BigJson(colleagues: Vector[Person])
 
-class BigJsonTest extends JsonTest[BigJson] with Serializable with CodecDef {
+class BigJsonTest extends JsonTest[BigJson] with Serializable {
 
   val total = 1000
   def colleagues = (for (i ← 1 to 1000) yield s"""{"name": "person-$i", "age": $i}""").mkString(", ")
@@ -79,7 +78,10 @@ class BigJsonTest extends JsonTest[BigJson] with Serializable with CodecDef {
     MapBasedCodecs.deriveCodec[BigJson]
   }
 
-  override def refuelCodec = CaseClassCodec.from[BigJson]
+  override def refuelCodec = {
+    import refuel.json.JsonTransform._
+    Derive[BigJson]
+  }
 
   override def checkResult(result: BigJson): Unit = {
     assert(result.colleagues.size == total, s"result.colleagues.size(${result.colleagues.size}) != $total")

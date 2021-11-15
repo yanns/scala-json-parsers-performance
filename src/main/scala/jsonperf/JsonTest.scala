@@ -7,7 +7,7 @@ abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) ext
   def json: String
   def newA: A
   def clazz: Class[A]
-  def refuelCodec: refuel.json.Codec[A]
+  def refuelCodec: refuel.json.codecs.Codec[A]
   def sphereJSON: io.sphere.json.JSON[A]
   def playFormat: play.api.libs.json.Format[A]
   def sprayJsonFormat: spray.json.JsonFormat[A]
@@ -25,9 +25,9 @@ abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) ext
   type Parsing = JsonParsing[A]
 
   val refuelParsing = new Parsing with refuel.json.JsonTransform {
-    val codec: refuel.json.Codec[A] = refuelCodec
-    override def deserialize(json: String): A = json.as[A](codec).right.get
-    override def serialize(a: A): String = a.toJString(codec)
+    val codec: refuel.json.codecs.Codec[A] = refuelCodec
+    override def deserialize(json: String): A = json.readAs[A](codec).get
+    override def serialize(a: A): String = a.writeAsString(codec).get
     override def toString: String = "refuelParsing"
   }
 
@@ -49,7 +49,7 @@ abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) ext
     import org.json4s.native.Serialization
     implicit val formats = DefaultFormats
     override def deserialize(json: String): A = {
-      parse(json).extract[A]
+      org.json4s.native.JsonMethods.parse(json).extract[A]
     }
     override def serialize(a: A): String = {
       Serialization.write(a)
