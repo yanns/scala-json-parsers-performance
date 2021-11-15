@@ -8,6 +8,7 @@ abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) ext
   def newA: A
   def clazz: Class[A]
   def refuelCodec: refuel.json.codecs.Codec[A]
+  def sphereJSON: io.sphere.json.JSON[A]
   def playFormat: play.api.libs.json.Format[A]
   def sprayJsonFormat: spray.json.JsonFormat[A]
   def argonautCodec: argonaut.CodecJson[A]
@@ -68,6 +69,17 @@ abstract class JsonTest[A <: AnyRef](implicit ev: scala.reflect.Manifest[A]) ext
       Serialization.write(a)
     }
     override def toString: String = "json4sJackson"
+  }
+
+  val sphereJson: Parsing = new Parsing {
+    val fromToJson = sphereJSON
+    override def deserialize(json: String): A = {
+      io.sphere.json.getFromJSON(json)(fromToJson)
+    }
+    override def serialize(a: A): String = {
+      io.sphere.json.toJSON(a)(fromToJson)
+    }
+    override def toString: String = "sphereJson"
   }
 
   val playJson: Parsing = new Parsing {

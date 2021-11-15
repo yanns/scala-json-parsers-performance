@@ -47,6 +47,9 @@ abstract class JmhBenchmarks[A <: AnyRef, B](val test: JsonTest[A]) {
   def runJson4sJackson: B = runTest(json4sJackson)
 
   @Benchmark
+  def runSphereJson: B = runTest(sphereJson)
+
+  @Benchmark
   def runPlayJson: B = runTest(playJson)
 
   @Benchmark

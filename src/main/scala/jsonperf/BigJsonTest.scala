@@ -24,6 +24,12 @@ class BigJsonTest extends JsonTest[BigJson] with Serializable {
     Json.format[BigJson]
   }
 
+  override def sphereJSON = {
+    import io.sphere.json.generic._
+    implicit val personFromJson = jsonProduct(Person.apply _)
+    deriveJSON[BigJson]
+  }
+
   override def sprayJsonFormat = {
     import spray.json.DefaultJsonProtocol._
     implicit val personFormat = spray.json.DefaultJsonProtocol.jsonFormat2(Person)
