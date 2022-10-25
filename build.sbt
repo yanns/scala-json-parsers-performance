@@ -5,7 +5,7 @@ version := "1.0"
 scalaVersion := "2.13.5"
 
 val json4sVersion = "4.0.3"
-val circeVersion = "0.13.0"
+val circeVersion = "0.14.3"
 
 resolvers ++=
   Resolver.bintrayRepo("commercetools", "maven") ::
