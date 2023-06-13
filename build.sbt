@@ -2,7 +2,7 @@ name := """json-perf"""
 
 version := "1.0"
 
-scalaVersion := "2.13.5"
+scalaVersion := "2.13.11"
 
 val json4sVersion = "4.0.3"
 val circeVersion = "0.13.0"
